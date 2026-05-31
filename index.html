@@ -312,36 +312,20 @@ function stripForStorage(files){
 }
 
 // Schema version – bump this when new seed data is added
-var SCHEMA_VER = '5';
-(function(){
-  try{
-    // If schema version changed, wipe old expense data so fresh seed loads
-    if(localStorage.getItem('hibr_sv') !== SCHEMA_VER){
-      localStorage.removeItem(KE);
-      localStorage.setItem('hibr_sv', SCHEMA_VER);
-    }
-    // Also clear oversized entries just in case
-    var raw=localStorage.getItem(KE);
-    if(raw && raw.length > 500000){localStorage.removeItem(KE);}
-    var raw2=localStorage.getItem(KR);
-    if(raw2 && raw2.length > 500000){localStorage.removeItem(KR);}
-  }catch(e){}
-})();
-
-var expenses=JSON.parse(localStorage.getItem(KE)||'null');
-if(!expenses){
-  expenses=[
-    {id:1,date:'2026-04-28',descAr:'إيجار شهر مايو 2026',descEn:'Rent – May 2026',amount:600,cat:'إيجار | Rent',notes:'الشهر الأول',files:[]},
-    {id:2,date:'2026-04-28',descAr:'تأمين المحل',descEn:'Security Deposit',amount:600,cat:'تأمين | Deposit',notes:'يُسترد نهاية العقد',files:[]},
-    {id:3,date:'2026-05-13',descAr:'عقد التأسيس',descEn:'Establishment Contract',amount:54,cat:'تأسيس | Setup',notes:'رسوم عقد التأسيس',files:[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}]},
-    {id:4,date:'2026-05-17',descAr:'مكيفات للمطبعة',descEn:'Air Conditioners – Dexon',amount:489.700,cat:'تأسيس | Setup',notes:'2×24000BTU + 1×18000BTU | يوريكا السالمية',files:[]}
-  ];
-  saveE();
-} else {
-  expenses=expenses.map(function(e){return Object.assign({files:[]},e);});
-  var est=expenses.find(function(e){return e.id===3;});
-  if(est&&(!est.files||!est.files.length)){est.files=[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}];}
-}
+// Base expenses — always shown regardless of localStorage state
+var BASE_EXPENSES=[
+  {id:1,date:'2026-04-28',descAr:'إيجار شهر مايو 2026',descEn:'Rent – May 2026',amount:600,cat:'إيجار | Rent',notes:'الشهر الأول',files:[]},
+  {id:2,date:'2026-04-28',descAr:'تأمين المحل',descEn:'Security Deposit',amount:600,cat:'تأمين | Deposit',notes:'يُسترد نهاية العقد',files:[]},
+  {id:3,date:'2026-05-13',descAr:'عقد التأسيس',descEn:'Establishment Contract',amount:54,cat:'تأسيس | Setup',notes:'رسوم عقد التأسيس',files:[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}]},
+  {id:4,date:'2026-05-17',descAr:'مكيفات للمطبعة',descEn:'Air Conditioners – Dexon',amount:489.700,cat:'تأسيس | Setup',notes:'2×24000BTU + 1×18000BTU | يوريكا السالمية',files:[]}
+];
+var BASE_IDS=BASE_EXPENSES.map(function(e){return e.id;});
+// Merge base + any user-added expenses from localStorage
+var _extras=[];
+try{var _r=localStorage.getItem(KE);if(_r&&_r.length<500000){_extras=(JSON.parse(_r)||[]).filter(function(e){return BASE_IDS.indexOf(e.id)<0;});}}catch(e){}
+var expenses=BASE_EXPENSES.concat(_extras).map(function(e){return Object.assign({files:[]},e);});
+var est=expenses.find(function(e){return e.id===3;});
+if(est&&(!est.files||!est.files.length)){est.files=[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}];}
 
 var rentDocs=JSON.parse(localStorage.getItem(KR)||'null');
 if(!rentDocs){
