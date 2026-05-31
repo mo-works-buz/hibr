@@ -572,6 +572,8 @@ function refresh(){if(typeof ALL_CATS==='undefined'||typeof RENT_MONTHS==='undef
 document.getElementById('exp-date').value=new Date().toISOString().split('T')[0];
 refresh();
 setInterval(function(){var t=cd('2026-08-01');['cd-dash','cd-rent','cd-rent2'].forEach(function(id){setH(id,t);});},60000);
+
+refresh();
 </script>
 </body>
 </html>
