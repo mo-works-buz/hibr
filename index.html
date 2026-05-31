@@ -548,7 +548,7 @@ function setT(id,v){var el=document.getElementById(id);if(el)el.textContent=v;}
 
 var ALL_CATS=['إيجار | Rent','تأمين | Deposit','تأسيس | Setup','رواتب | Salaries','مواد ومستلزمات | Materials','كهرباء ومياه | Utilities','تسويق | Marketing','صيانة | Maintenance','مصاريف إدارية | Admin','أخرى | Other'];
 
-function refresh(){
+function refresh(){if(typeof ALL_CATS==='undefined'||typeof RENT_MONTHS==='undefined')return;
   var tot=total(),cs=cats(),ms=byMonth(),per=tot/3,timer=cd('2026-08-01');
   setH('cd-dash',timer);setH('cd-rent',timer);setH('cd-rent2',timer);
   setH('dash-total',fmt(tot)+' <small style="font-size:12px">KD</small>');
