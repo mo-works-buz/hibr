@@ -359,7 +359,8 @@ if(!expenses){
     {id:1,date:'2026-04-28',descAr:'إيجار شهر مايو 2026',descEn:'Rent – May 2026',amount:600,cat:'إيجار | Rent',notes:'الشهر الأول',files:[]},
     {id:2,date:'2026-04-28',descAr:'تأمين المحل',descEn:'Security Deposit',amount:600,cat:'تأمين | Deposit',notes:'يُسترد نهاية العقد',files:[]},
     {id:3,date:'2026-05-13',descAr:'عقد التأسيس',descEn:'Establishment Contract',amount:54,cat:'تأسيس | Setup',notes:'رسوم عقد التأسيس',files:[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}]},
-    {id:4,date:'2026-05-17',descAr:'مكيفات للمطبعة',descEn:'Air Conditioners – Dexon',amount:489.700,cat:'تأسيس | Setup',notes:'2×24000BTU + 1×18000BTU | يوريكا السالمية',files:[]}
+    {id:4,date:'2026-05-17',descAr:'مكيفات للمطبعة',descEn:'Air Conditioners – Dexon',amount:489.700,cat:'تأسيس | Setup',notes:'2×24000BTU + 1×18000BTU | يوريكا السالمية',files:[]},
+  {id:5,date:'2026-06-01',descAr:'رسوم ترخيص الهيئة العامة للصناعة',descEn:'Industrial License Fee – Public Authority for Industry',amount:47,cat:'تأسيس | Setup',notes:'طلب الحصول على ترخيص لإقامة حرفة صناعية',files:[]}
   ];
   saveE();
 } else {
@@ -368,6 +369,10 @@ if(!expenses){
   if(est&&(!est.files||!est.files.length)){est.files=[{name:'عقد التأسيس المطبعه.pdf',type:'application/pdf',preloaded:'est'}];saveE();}
   if(!expenses.find(function(e){return e.id===4;})){
     expenses.push({id:4,date:'2026-05-17',descAr:'مكيفات للمطبعة',descEn:'Air Conditioners – Dexon',amount:489.700,cat:'تأسيس | Setup',notes:'2×24000BTU + 1×18000BTU | يوريكا السالمية',files:[]});
+    saveE();
+  }
+  if(!expenses.find(function(e){return e.id===5;})){
+    expenses.push({id:5,date:'2026-06-01',descAr:'رسوم ترخيص الهيئة العامة للصناعة',descEn:'Industrial License Fee – Public Authority for Industry',amount:47,cat:'تأسيس | Setup',notes:'طلب الحصول على ترخيص لإقامة حرفة صناعية',files:[]});
     saveE();
   }
 }
