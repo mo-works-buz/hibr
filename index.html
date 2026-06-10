@@ -382,7 +382,7 @@ if(!expenses){
     saveE();
   }
 
-  var _e6=expenses.find(function(e){return e.id===6;});if(_e6&&!_e6.contractTotal){_e6.contractTotal=350;saveE();}
+  var _e6=expenses.find(function(e){return e.id===6;});if((_e6&&(!_e6.contractTotal||_e6.contractTotal===300))){_e6.contractTotal=350;saveE();}
   if(!expenses.find(function(e){return e.id===7;})){
     expenses.push({id:7,date:'2026-06-10',descAr:'مساح وأرضيات - دفعة أولى',descEn:'Plastering & Flooring – First Advance',amount:300,contractTotal:700,cat:'تأسيس | Setup',notes:'دفعة أولى من إجمالي 700 KD',files:[]});
     saveE();
