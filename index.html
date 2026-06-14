@@ -383,8 +383,17 @@ if(!expenses){
   }
 
   var _e6=expenses.find(function(e){return e.id===6;});if((_e6&&(!_e6.contractTotal||_e6.contractTotal===300))){_e6.contractTotal=350;saveE();}if(_e6&&_e6.amount<350){_e6.amount=350;_e6.notes='مكتمل الدفع ✅';saveE();}
-  var _e7=expenses.find(function(e){return e.id===7;});if(_e7&&_e7.amount<550){_e7.amount=550;_e7.notes='دفعة أولى 300 KD + دفعة ثانية 250 KD';saveE();}if(_e7&&(_e7.contractTotal===700||!_e7.contractTotal)){_e7.contractTotal=850;_e7.descAr='مساح وأرضيات وأصباغ - دفعة أولى';saveE();}
-  if(!expenses.find(function(e){return e.id===7;})){
+  var _idx7=expenses.findIndex(function(e){return e.id===7;});
+  if(_idx7>=0){
+    var _e7=expenses[_idx7];
+    if(_e7.amount!==550||_e7.contractTotal!==850||(_e7.descAr||'').indexOf('أصباغ')<0){
+      _e7.amount=550;_e7.contractTotal=850;
+      _e7.descAr='مساح وأرضيات وأصباغ - دفعة أولى';
+      _e7.descEn='Plastering, Flooring & Painting – First Advance';
+      _e7.notes='دفعة أولى 300 KD + دفعة ثانية 250 KD';
+      saveE();
+    }
+  } else {
     expenses.push({id:7,date:'2026-06-10',descAr:'مساح وأرضيات وأصباغ - دفعة أولى',descEn:'Plastering, Flooring & Painting – First Advance',amount:550,contractTotal:850,cat:'تأسيس | Setup',notes:'دفعة أولى 300 KD + دفعة ثانية 250 KD',files:[]});
     saveE();
   }}
