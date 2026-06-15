@@ -635,7 +635,7 @@ function refresh(){
   setT('exp-total',fmt(tot)+' KD');
   setH('exp-badge','<span class="badge badge-upcoming">'+expenses.length+' مصروف | Expense</span>');
   setT('rep-total',fmt(tot));setT('rep-per',fmt(per));setT('rep-count',expenses.length);setT('rep-total-row',fmt(tot)+' KD');
-  setH('rep-cats',ALL_CATS.map(function(cat){var a=cs[cat]||0;var p=tot>0?(a/tot*100).toFixed(1):'0.0';return'<tr><td style="text-align:right">'+cat+'</td><td class="amount-kd">'+fmt(a)+'</td><td>'+p+'%</td></tr>';}).join(''));
+  setH('rep-cats',(ALL_CATS||[]).map(function(cat){var a=cs[cat]||0;var p=tot>0?(a/tot*100).toFixed(1):'0.0';return'<tr><td style="text-align:right">'+cat+'</td><td class="amount-kd">'+fmt(a)+'</td><td>'+p+'%</td></tr>';}).join(''));
   var me=Object.entries(ms);
   setH('rep-months',me.length?me.map(function(en){return'<tr><td>'+en[0]+'</td><td>'+en[1].c+'</td><td class="amount-kd">'+fmt(en[1].t)+' KD</td></tr>';}).join(''):'<tr><td colspan="3" class="text-muted" style="padding:14px">لا توجد بيانات | No data</td></tr>');
   ['p1','p2','p3'].forEach(function(id){setT(id,fmt(per)+' KD');});
