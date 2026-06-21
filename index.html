@@ -367,7 +367,8 @@ if(!expenses){
   {id:9,date:'2026-06-14',descAr:'حديد السلم',descEn:'Staircase Iron',amount:0,contractTotal:190,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]},
   {id:10,date:'2026-06-14',descAr:'صب الخرسانة',descEn:'Concrete Pouring',amount:0,contractTotal:190,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]},
   {id:11,date:'2026-06-17',descAr:'سيراميك الحمام',descEn:'Bathroom Ceramic',amount:29,contractTotal:350,cat:'تأسيس | Setup',notes:'دفعة أولى — بنك الخليج — MUYASSAR A***D',files:[]},
-  {id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]}
+  {id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]},
+  {id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:0,contractTotal:350,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]}
   ];
   saveE();
 } else {
@@ -406,7 +407,8 @@ if(!expenses){
   var _e10=expenses.find(function(e){return e.id===10;});
   if(_e10&&_e10.amount!==0){_e10.amount=0;_e10.notes='لم يُدفع بعد';saveE();}
   if(!expenses.find(function(e){return e.id===11;})){expenses.push({id:11,date:'2026-06-17',descAr:'سيراميك الحمام',descEn:'Bathroom Ceramic',amount:29,contractTotal:350,cat:'تأسيس | Setup',notes:'دفعة أولى — بنك الخليج — MUYASSAR A***D',files:[]});saveE();}
-  if(!expenses.find(function(e){return e.id===12;})){expenses.push({id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===12;})){expenses.push({id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]},
+  {id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:0,contractTotal:350,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
   }
 
 var rentDocs=JSON.parse(localStorage.getItem(KR)||'null');
