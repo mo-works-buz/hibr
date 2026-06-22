@@ -369,7 +369,7 @@ if(!expenses){
   {id:11,date:'2026-06-17',descAr:'سيراميك الحمام',descEn:'Bathroom Ceramic',amount:29,contractTotal:350,cat:'تأسيس | Setup',notes:'دفعة أولى — بنك الخليج — MUYASSAR A***D',files:[]},
   {id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]},
   {id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:350,contractTotal:350,cat:'تأسيس | Setup',notes:'مدفوع بالكامل ✅',files:[]},
-  {id:14,date:'2026-06-21',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]}
+  {id:14,date:'2026-06-22',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:300,contractTotal:600,cat:'تأسيس | Setup',notes:'دفعة مقدم 300 KD — أرشد 200 + محمد 100',files:[]}
   ];
   saveE();
 } else {
@@ -412,7 +412,9 @@ if(!expenses){
   if(!expenses.find(function(e){return e.id===13;})){expenses.push({id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:0,contractTotal:350,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
   var _e13=expenses.find(function(e){return e.id===13;});
   if(_e13&&_e13.amount!==350){_e13.amount=350;_e13.notes='مدفوع بالكامل ✅';saveE();}
-  if(!expenses.find(function(e){return e.id===14;})){expenses.push({id:14,date:'2026-06-21',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===14;})){expenses.push({id:14,date:'2026-06-22',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
+  var _e14=expenses.find(function(e){return e.id===14;});
+  if(_e14&&_e14.amount!==300){_e14.amount=300;_e14.notes='دفعة مقدم 300 KD — أرشد 200 + محمد 100';saveE();}
   }
 
 var rentDocs=JSON.parse(localStorage.getItem(KR)||'null');
