@@ -415,6 +415,7 @@ if(!expenses){
   if(!expenses.find(function(e){return e.id===14;})){expenses.push({id:14,date:'2026-06-22',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
   var _e14=expenses.find(function(e){return e.id===14;});
   if(_e14&&_e14.amount!==300){_e14.amount=300;_e14.notes='دفعة مقدم 300 KD — أرشد 200 + محمد 100';saveE();}
+  if(!expenses.find(function(e){return e.id===15;})){expenses.push({id:15,date:'2026-06-24',descAr:'تركيب التكييف وهوز 9 متر',descEn:'AC Installation & 9m Hose',amount:56,cat:'تأسيس | Setup',notes:'تركيب التكييف وإضافة هوز طول 9 متر',files:[]});saveE();}
   }
 
 var rentDocs=JSON.parse(localStorage.getItem(KR)||'null');
