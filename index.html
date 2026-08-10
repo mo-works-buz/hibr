@@ -134,6 +134,18 @@ input:focus,select:focus{outline:none;border-color:#1B2A6B}
     <div class="card"><div class="card-title">📋 أحدث المصاريف | Latest Expenses</div><div id="dash-latest"></div></div>
   </div>
   <div class="card"><div class="card-title">🥧 توزيع المصاريف | Expense Breakdown</div><div id="dash-cats"></div></div>
+  <div class="card"><div class="card-title">🏆 الإنجازات والتراخيص | Milestones & Licenses</div>
+    <table>
+      <tr><td style="text-align:right;font-weight:600">✅ تأسيس الشركة | Company Founded</td><td>مايو 2026 | May 2026</td></tr>
+      <tr><td style="text-align:right;font-weight:600">✅ عقد إيجار المحل | Shop Lease Signed</td><td>مايو 2026 | May 2026</td></tr>
+      <tr><td style="text-align:right;font-weight:600">✅ ترخيص الهيئة العامة للصناعة | Industry License</td><td>10/08/2026 — رقم الترخيص: 212300</td></tr>
+    </table>
+    <div style="margin-top:10px;padding:10px;background:#E2EFDA;border-radius:8px;font-size:12px;color:#217346">
+      <strong>📄 تفاصيل ترخيص الصناعة:</strong><br>
+      النشاط: طباعة (مطبعة) | الكيان: ش.و.ش | الموقع: المنطقة الصناعية الثالثة - الشويخ، قطعة ب<br>
+      صادر: 10/08/2026 &nbsp;|&nbsp; ينتهي: 10/08/2031
+    </div>
+  </div>
 </div>
 
 <!-- EXPENSES -->
@@ -369,7 +381,7 @@ if(!expenses){
   {id:11,date:'2026-06-17',descAr:'سيراميك الحمام',descEn:'Bathroom Ceramic',amount:29,contractTotal:350,cat:'تأسيس | Setup',notes:'دفعة أولى — بنك الخليج — MUYASSAR A***D',files:[]},
   {id:12,date:'2026-06-17',descAr:'بلاكات ومفاتيح كهرباء',descEn:'Electrical Switches & Plates',amount:57.75,contractTotal:null,cat:'نثريات | Miscellaneous',notes:'مدفوع — flexpay — Ref: 90891',files:[]},
   {id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:350,contractTotal:350,cat:'تأسيس | Setup',notes:'مدفوع بالكامل ✅',files:[]},
-  {id:14,date:'2026-06-22',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:300,contractTotal:600,cat:'تأسيس | Setup',notes:'دفعة مقدم 300 KD — أرشد 200 + محمد 100',files:[]}
+  {id:14,date:'2026-06-21',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]}
   ];
   saveE();
 } else {
@@ -412,15 +424,7 @@ if(!expenses){
   if(!expenses.find(function(e){return e.id===13;})){expenses.push({id:13,date:'2026-06-14',descAr:'أعمال صحية',descEn:'Plumbing Works',amount:0,contractTotal:350,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
   var _e13=expenses.find(function(e){return e.id===13;});
   if(_e13&&_e13.amount!==350){_e13.amount=350;_e13.notes='مدفوع بالكامل ✅';saveE();}
-  if(!expenses.find(function(e){return e.id===14;})){expenses.push({id:14,date:'2026-06-22',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
-  var _e14=expenses.find(function(e){return e.id===14;});
-  if(_e14&&_e14.amount!==300){_e14.amount=300;_e14.notes='دفعة مقدم 300 KD — أرشد 200 + محمد 100';saveE();}
-  if(!expenses.find(function(e){return e.id===15;})){expenses.push({id:15,date:'2026-06-24',descAr:'تركيب التكييف وهوز 9 متر',descEn:'AC Installation & 9m Hose',amount:56,cat:'تأسيس | Setup',notes:'تركيب التكييف وإضافة هوز طول 9 متر',files:[]});saveE();}
-  if(!expenses.find(function(e){return e.id===16;})){expenses.push({id:16,date:'2026-06-27',descAr:'استكمال دفع باب المحل الرئيسي',descEn:'Main Shop Door – Final Payment',amount:300,cat:'تأسيس | Setup',notes:'مكتمل الدفع ✅ إجمالي العقد 600 KD — WAMD/KNET',files:[]});saveE();}
-  if(!expenses.find(function(e){return e.id===17;})){expenses.push({id:17,date:'2026-06-27',descAr:'شراء شفاط',descEn:'Exhaust Fan – Al-Arabia Electronics',amount:28,cat:'تأسيس | Setup',notes:'العربية للكهرباء',files:[]});saveE();}
-  if(!expenses.find(function(e){return e.id===18;})){expenses.push({id:18,date:'2026-06-27',descAr:'تركيب لوح معاكس بدل الزجاج - الجهة اليسرى العلوية',descEn:'Plywood Panel – Upper Left (replacing glass)',amount:20,cat:'تأسيس | Setup',notes:'بدل الزجاج في الجهة اليسرى العلوية',files:[]});saveE();}
-  var _e14b=expenses.find(function(e){return e.id===14;});
-  if(_e14b&&_e14b.notes&&_e14b.notes.indexOf('دفعة أولى')===-1){_e14b.notes='مكتمل الدفع ✅ دفعة أولى 300 KD — أرشد 200 + محمد 100';saveE();}
+  if(!expenses.find(function(e){return e.id===14;})){expenses.push({id:14,date:'2026-06-21',descAr:'باب المحل الرئيسي',descEn:'Main Shop Door',amount:0,contractTotal:600,cat:'تأسيس | Setup',notes:'لم يُدفع بعد',files:[]});saveE();}
   }
 
 var rentDocs=JSON.parse(localStorage.getItem(KR)||'null');
