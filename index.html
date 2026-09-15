@@ -469,7 +469,7 @@ if(!expenses){
   {id:20,date:'2026-09-14',descAr:'مفروشات',descEn:'Furniture & Furnishings',amount:474,cat:'تأسيس | Setup',notes:'مشعل 100 + أرشد 374',files:[]},
   {id:21,date:'2026-09-14',descAr:'رسوم البلدية والإطفاء',descEn:'Municipality & Fire Dept Fees',amount:30,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]},
   {id:22,date:'2026-09-14',descAr:'طفايات حريق',descEn:'Fire Extinguishers',amount:23,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]},
-  {id:23,date:'2026-09-14',descAr:'شراء مكائن ومعدات',descEn:'Machinery & Equipment Purchase',amount:7500,cat:'تأسيس | Setup',notes:'مشعل 5,000 + أرشد 2,500 — مشعل غطّى حصة محمد',files:[]},
+  {id:23,date:'2026-09-14',descAr:'شراء مكائن ومعدات',descEn:'Machinery & Equipment Purchase',amount:7500,cat:'تأسيس | Setup',notes:'محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)',files:[]},
   {id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]}
   ];
   saveE();
@@ -524,7 +524,7 @@ if(!expenses){
   if(!expenses.find(function(e){return e.id===20;})){expenses.push({id:20,date:'2026-09-14',descAr:'مفروشات',descEn:'Furniture & Furnishings',amount:474,cat:'تأسيس | Setup',notes:'مشعل 100 + أرشد 374',files:[]});saveE();}
   if(!expenses.find(function(e){return e.id===21;})){expenses.push({id:21,date:'2026-09-14',descAr:'رسوم البلدية والإطفاء',descEn:'Municipality & Fire Dept Fees',amount:30,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]});saveE();}
   if(!expenses.find(function(e){return e.id===22;})){expenses.push({id:22,date:'2026-09-14',descAr:'طفايات حريق',descEn:'Fire Extinguishers',amount:23,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]});saveE();}
-  if(!expenses.find(function(e){return e.id===23;})){expenses.push({id:23,date:'2026-09-14',descAr:'شراء مكائن ومعدات',descEn:'Machinery & Equipment Purchase',amount:7500,cat:'تأسيس | Setup',notes:'مشعل 5,000 + أرشد 2,500 — مشعل غطّى حصة محمد',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===23;})){expenses.push({id:23,date:'2026-09-14',descAr:'شراء مكائن ومعدات',descEn:'Machinery & Equipment Purchase',amount:7500,cat:'تأسيس | Setup',notes:'محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)',files:[]});saveE();}
   var _e5lic=expenses.find(function(e){return e.id===5;});
   if(_e5lic){
     var _f5=(_e5lic.files||[]);
@@ -533,6 +533,7 @@ if(!expenses){
     _e5lic.files=_f5;saveE();
   }
   if(!expenses.find(function(e){return e.id===24;})){expenses.push({id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]});saveE();}
+  var _e23n=expenses.find(function(e){return e.id===23;});if(_e23n&&_e23n.notes!=='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)'){_e23n.notes='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)';saveE();}
   var _e24=expenses.find(function(e){return e.id===24;});if(_e24&&_e24.date==='2026-09-15'){_e24.date='2026-08-19';_e24.notes='مدفوع ✅ بتاريخ 19/08/2026';saveE();}
   var _e19=expenses.find(function(e){return e.id===19;});
   if(_e19&&!(_e19.files||[]).some(function(f){return f.preloaded==='env';})){
