@@ -131,6 +131,7 @@ input:focus,select:focus{outline:none;border-color:#1B2A6B}
       <tr><td style="text-align:right;font-weight:600">تأمين ✅ | Deposit</td><td class="amount-kd">600 KD</td></tr>
       <tr><td style="text-align:right;font-weight:600">سماح مجاني | Free Grace</td><td>يونيو + يوليو 2026 | Jun + Jul 2026</td></tr>
       <tr><td style="text-align:right;font-weight:600">إيجار أغسطس ✅ | Aug Rent</td><td class="amount-kd">600 KD</td></tr>
+      <tr><td style="text-align:right;font-weight:600">إيجار سبتمبر ✅ | Sep Rent</td><td class="amount-kd">600 KD (مشعل)</td></tr>
       <tr><td style="text-align:right;font-weight:600;color:#E26B0A">⏰ القادمة | Next Due</td><td style="color:#E26B0A;font-weight:700" id="due-cell-dash">—</td></tr>
     </table></div>
     <div class="card"><div class="card-title">📋 أحدث المصاريف | Latest Expenses</div><div id="dash-latest"></div></div>
@@ -248,7 +249,8 @@ input:focus,select:focus{outline:none;border-color:#1B2A6B}
       <tr><td style="text-align:right;font-weight:600">إيجار مايو ✅ | May Rent</td><td class="amount-kd">600 KD</td></tr>
       <tr><td style="text-align:right;font-weight:600">تأمين ✅ | Deposit</td><td class="amount-kd">600 KD</td></tr>
       <tr><td style="text-align:right;font-weight:600">إيجار أغسطس ✅ | Aug Rent</td><td class="amount-kd">600 KD</td></tr>
-      <tr><td style="text-align:right;font-weight:600">الإجمالي | Total</td><td class="amount-kd">1,800 KD</td></tr>
+      <tr><td style="text-align:right;font-weight:600">إيجار سبتمبر ✅ | Sep Rent</td><td class="amount-kd">600 KD (مشعل)</td></tr>
+      <tr><td style="text-align:right;font-weight:600">الإجمالي | Total</td><td class="amount-kd">2,400 KD</td></tr>
       <tr><td style="text-align:right;font-weight:600;color:#E26B0A">الدفعة القادمة | Next Payment</td><td style="color:#E26B0A;font-weight:700" id="due-cell-rent">—</td></tr>
     </table></div>
     <div class="card"><div class="card-title">⏰ العد التنازلي | Countdown</div><div id="cd-rent2" style="padding:6px"></div></div>
@@ -326,7 +328,7 @@ var MONTHS=[
   {k:'jun26',l:'يونيو 2026 | Jun 2026',   due:'—',         st:'grace',   a:0},
   {k:'jul26',l:'يوليو 2026 | Jul 2026',   due:'—',         st:'grace',   a:0},
   {k:'aug26',l:'أغسطس 2026 | Aug 2026',  due:'01/08/2026',st:'paid',    a:600},
-  {k:'sep26',l:'سبتمبر 2026 | Sep 2026',  due:'01/09/2026',st:'upcoming',a:600},
+  {k:'sep26',l:'سبتمبر 2026 | Sep 2026',  due:'01/09/2026',st:'paid',    a:600},
   {k:'oct26',l:'أكتوبر 2026 | Oct 2026',  due:'01/10/2026',st:'upcoming',a:600},
   {k:'nov26',l:'نوفمبر 2026 | Nov 2026',  due:'01/11/2026',st:'upcoming',a:600},
   {k:'dec26',l:'ديسمبر 2026 | Dec 2026',  due:'01/12/2026',st:'upcoming',a:600},
@@ -339,8 +341,8 @@ var MONTHS=[
 // ── Dynamic rent status engine ──
 var KP='hibr_rent_paid_v1';
 var rentPaid=JSON.parse(localStorage.getItem(KP)||'null');
-if(!rentPaid){rentPaid={may26:true,aug26:true};localStorage.setItem(KP,JSON.stringify(rentPaid));}
-if(!rentPaid.aug26){rentPaid.aug26=true;try{localStorage.setItem(KP,JSON.stringify(rentPaid));}catch(e){}}
+if(!rentPaid){rentPaid={may26:true,aug26:true,sep26:true};localStorage.setItem(KP,JSON.stringify(rentPaid));}
+if(!rentPaid.aug26||!rentPaid.sep26){rentPaid.aug26=true;rentPaid.sep26=true;try{localStorage.setItem(KP,JSON.stringify(rentPaid));}catch(e){}}
 function saveP(){try{localStorage.setItem(KP,JSON.stringify(rentPaid));}catch(e){}}
 function dueISO(m){if(!m.due||m.due==='—')return null;var p=m.due.split('/');return p[2]+'-'+p[1]+'-'+p[0];}
 function todayMid(){var d=new Date();d.setHours(0,0,0,0);return d;}
@@ -470,7 +472,8 @@ if(!expenses){
   {id:21,date:'2026-09-14',descAr:'رسوم البلدية والإطفاء',descEn:'Municipality & Fire Dept Fees',amount:30,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]},
   {id:22,date:'2026-09-14',descAr:'طفايات حريق',descEn:'Fire Extinguishers',amount:23,cat:'تأسيس | Setup',notes:'دفعها مشعل',files:[]},
   {id:23,date:'2026-09-14',descAr:'شراء مكائن ومعدات',descEn:'Machinery & Equipment Purchase',amount:7500,cat:'تأسيس | Setup',notes:'محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)',files:[]},
-  {id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]}
+  {id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]},
+  {id:25,date:'2026-09-18',descAr:'إيجار شهر سبتمبر 2026',descEn:'Rent – September 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ — دفعه مشعل',files:[]}
   ];
   saveE();
 } else {
@@ -533,6 +536,7 @@ if(!expenses){
     _e5lic.files=_f5;saveE();
   }
   if(!expenses.find(function(e){return e.id===24;})){expenses.push({id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===25;})){expenses.push({id:25,date:'2026-09-18',descAr:'إيجار شهر سبتمبر 2026',descEn:'Rent – September 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ — دفعه مشعل',files:[]});saveE();}
   var _e23n=expenses.find(function(e){return e.id===23;});if(_e23n&&_e23n.notes!=='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)'){_e23n.notes='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)';saveE();}
   var _e24=expenses.find(function(e){return e.id===24;});if(_e24&&_e24.date==='2026-09-15'){_e24.date='2026-08-19';_e24.notes='مدفوع ✅ بتاريخ 19/08/2026';saveE();}
   var _e19=expenses.find(function(e){return e.id===19;});
