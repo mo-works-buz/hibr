@@ -296,6 +296,23 @@ input:focus,select:focus{outline:none;border-color:#1B2A6B}
     <tr><td style="text-align:right;font-weight:600">إجمالي المصاريف | Total Expenses</td><td id="p-total" class="amount-kd">—</td></tr>
   </table></div>
 
+  <div class="card">
+    <div class="card-title">💰 من دفع ماذا | Who Paid What</div>
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>الشريك</th><th>دفع للمصاريف</th><th>حوّل لشريك</th><th>استلم من شريك</th><th>صافي المساهمة</th><th>الحصة المفروضة</th><th>الرصيد</th></tr></thead>
+      <tbody id="settle-body"></tbody>
+    </table></div>
+    <div id="settle-note" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔁 التحويلات بين الشركاء | Partner Transfers</div>
+    <div style="overflow-x:auto"><table>
+      <thead><tr><th>التاريخ</th><th>من</th><th>إلى</th><th>المبلغ</th><th>ملاحظة</th></tr></thead>
+      <tbody id="transfer-body"></tbody>
+    </table></div>
+  </div>
+
   <div class="card" style="margin-top:13px">
     <div class="card-title">📊 نسب الأرباح | Profit Share Ratios</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:4px">
@@ -759,6 +776,43 @@ function renderRent(){
   }).join('');
 }
 
+// ── Partner payments & settlement ──
+var PNAMES=['محمد','مشعل','أرشد'];
+// PAYERS[expense id] = [محمد, مشعل, أرشد]
+var PAYERS={14:[100,0,200],19:[0,100,0],20:[0,100,374],21:[0,30,0],22:[0,23,0],23:[1000,4000,2500],25:[0,600,0]};
+var TRANSFERS=[{date:'2026-09-20',from:0,to:1,amount:1350,note:'تسديد جزء من حصة محمد'}];
+function settle(){
+  var paid=[0,0,0],alloc=0;
+  expenses.forEach(function(e){
+    var p=PAYERS[e.id]; if(!p)return;
+    for(var i=0;i<3;i++){paid[i]+=p[i];alloc+=p[i];}
+  });
+  var out=[0,0,0],inn=[0,0,0];
+  TRANSFERS.forEach(function(t){out[t.from]+=t.amount;inn[t.to]+=t.amount;});
+  var share=alloc/3,rows=[];
+  for(var i=0;i<3;i++){
+    var net=paid[i]+out[i]-inn[i];
+    rows.push({name:PNAMES[i],paid:paid[i],out:out[i],inn:inn[i],net:net,share:share,diff:net-share});
+  }
+  return {rows:rows,alloc:alloc,undetermined:total()-alloc};
+}
+function renderSettle(){
+  if(typeof PAYERS==='undefined'||!PAYERS)return; // guard: saveE() can run before these are initialised
+  var b=document.getElementById('settle-body'); if(!b)return;
+  var st=settle();
+  b.innerHTML=st.rows.map(function(r){
+    var c=r.diff>0.001?'#217346':(r.diff<-0.001?'#C00000':'#666');
+    var lbl=r.diff>0.001?('له '+fmt(r.diff)):(r.diff<-0.001?('عليه '+fmt(-r.diff)):'متساوي');
+    return '<tr><td style="text-align:right;font-weight:600">'+r.name+'</td><td class="amount-kd">'+fmt(r.paid)+'</td><td>'+(r.out?fmt(r.out):'—')+'</td><td>'+(r.inn?fmt(r.inn):'—')+'</td><td class="amount-kd"><b>'+fmt(r.net)+'</b></td><td>'+fmt(r.share)+'</td><td style="color:'+c+';font-weight:700">'+lbl+' KD</td></tr>';
+  }).join('');
+  document.getElementById('settle-note').innerHTML=
+    '<div class="alert alert-warning" style="margin:0">⚠️ الحساب أعلاه على المصاريف المحددة فقط ('+fmt(st.alloc)+' KD). يوجد <strong>'+fmt(st.undetermined)+' KD</strong> لم يُحدَّد من دفعها بعد.</div>';
+  var tb=document.getElementById('transfer-body');
+  if(tb)tb.innerHTML=TRANSFERS.length?TRANSFERS.map(function(t){
+    return '<tr><td>'+new Date(t.date).toLocaleDateString('ar-KW')+'</td><td style="font-weight:600">'+PNAMES[t.from]+'</td><td style="font-weight:600">'+PNAMES[t.to]+'</td><td class="amount-kd">'+fmt(t.amount)+' KD</td><td class="text-muted">'+(t.note||'—')+'</td></tr>';
+  }).join(''):'<tr><td colspan="5" class="text-muted" style="padding:14px">لا توجد تحويلات</td></tr>';
+}
+
 // Stats & refresh
 function fmt(v){return(+v).toFixed(3);}
 function total(){return expenses.reduce(function(s,e){return s+e.amount;},0);}
@@ -804,6 +858,7 @@ function refresh(){
   setH('rep-months',me.length?me.map(function(en){return'<tr><td>'+en[0]+'</td><td>'+en[1].c+'</td><td class="amount-kd">'+fmt(en[1].t)+' KD</td></tr>';}).join(''):'<tr><td colspan="3" class="text-muted" style="padding:14px">لا توجد بيانات | No data</td></tr>');
   ['p1','p2','p3'].forEach(function(id){setT(id,fmt(per)+' KD');});
   setT('p-total',fmt(tot)+' KD');
+  renderSettle();
   renderRent();
 }
 
