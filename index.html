@@ -507,7 +507,10 @@ if(!expenses){
   {id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]},
   {id:25,date:'2026-09-18',descAr:'إيجار شهر سبتمبر 2026',descEn:'Rent – September 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ — دفعه مشعل',files:[]},
   {id:26,date:'2026-09-21',descAr:'أتعاب مخلص معاملات (جمال)',descEn:'Government Transactions Agent (Jamal)',amount:100,cat:'مصاريف إدارية | Admin',notes:'دفعها مشعل — تشمل استخراج رخصة الإطفاء رقم 226917038',files:[{name:'رخصة الإطفاء - مطبعة حبر.pdf',type:'application/pdf',preloaded:'fire'}]},
-  {id:27,date:'2026-09-21',descAr:'عدة إسعافات أولية',descEn:'First Aid Kit',amount:7,cat:'تأسيس | Setup',notes:'دفعها أرشد',files:[]}
+  {id:27,date:'2026-09-21',descAr:'عدة إسعافات أولية',descEn:'First Aid Kit',amount:7,cat:'تأسيس | Setup',notes:'دفعها أرشد',files:[]},
+  {id:28,date:'2026-10-06',descAr:'رافعة شوكية يدوية',descEn:'Manual Pallet Jack (Fork Lifter)',amount:25,cat:'تأسيس | Setup',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته',files:[]},
+  {id:29,date:'2026-10-06',descAr:'مكينة تخريم ورق',descEn:'Paper Hole Punch Machine',amount:100,cat:'تأسيس | Setup',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته',files:[]},
+  {id:30,date:'2026-10-06',descAr:'ورق ومستلزمات: رف + طاولة تجليد + دولاب صغير',descEn:'Paper & Accessories: Rack + Binding Table + Small Cupboard',amount:300,cat:'مواد ومستلزمات | Materials',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته — ملاحظة: الورق وحده قد يتجاوز 500 د.ك (بانتظار التوضيح)',files:[]}
   ];
   saveE();
 } else {
@@ -570,9 +573,13 @@ if(!expenses){
     _e5lic.files=_f5;saveE();
   }
   if(!expenses.find(function(e){return e.id===24;})){expenses.push({id:24,date:'2026-08-19',descAr:'إيجار شهر أغسطس 2026',descEn:'Rent – August 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ بتاريخ 19/08/2026',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===28;})){expenses.push({id:28,date:'2026-10-06',descAr:'رافعة شوكية يدوية',descEn:'Manual Pallet Jack (Fork Lifter)',amount:25,cat:'تأسيس | Setup',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===29;})){expenses.push({id:29,date:'2026-10-06',descAr:'مكينة تخريم ورق',descEn:'Paper Hole Punch Machine',amount:100,cat:'تأسيس | Setup',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته',files:[]});saveE();}
+  if(!expenses.find(function(e){return e.id===30;})){expenses.push({id:30,date:'2026-10-06',descAr:'ورق ومستلزمات: رف + طاولة تجليد + دولاب صغير',descEn:'Paper & Accessories: Rack + Binding Table + Small Cupboard',amount:300,cat:'مواد ومستلزمات | Materials',notes:'مشعل دفع حصته + حصة محمد، أرشد دفع حصته — ملاحظة: الورق وحده قد يتجاوز 500 د.ك (بانتظار التوضيح)',files:[]});saveE();}
   if(!expenses.find(function(e){return e.id===26;})){expenses.push({id:26,date:'2026-09-21',descAr:'أتعاب مخلص معاملات (جمال)',descEn:'Government Transactions Agent (Jamal)',amount:100,cat:'مصاريف إدارية | Admin',notes:'دفعها مشعل — تشمل استخراج رخصة الإطفاء رقم 226917038',files:[{name:'رخصة الإطفاء - مطبعة حبر.pdf',type:'application/pdf',preloaded:'fire'}]});saveE();}
   if(!expenses.find(function(e){return e.id===27;})){expenses.push({id:27,date:'2026-09-21',descAr:'عدة إسعافات أولية',descEn:'First Aid Kit',amount:7,cat:'تأسيس | Setup',notes:'دفعها أرشد',files:[]});saveE();}
   if(!expenses.find(function(e){return e.id===25;})){expenses.push({id:25,date:'2026-09-18',descAr:'إيجار شهر سبتمبر 2026',descEn:'Rent – September 2026',amount:600,cat:'إيجار | Rent',notes:'مدفوع ✅ — دفعه مشعل',files:[]});saveE();}
+  [28,29,30].forEach(function(id){var e=expenses.find(function(x){return x.id===id;});if(e&&e.notes&&e.notes.indexOf('لم يُحدَّد')===0){e.notes=e.notes.replace('لم يُحدَّد من دفعها بعد','مشعل دفع حصته + حصة محمد، أرشد دفع حصته');saveE();}});
   var _e23n=expenses.find(function(e){return e.id===23;});if(_e23n&&_e23n.notes!=='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)'){_e23n.notes='محمد 1,000 + مشعل 4,000 + أرشد 2,500 — مشعل غطّى المتبقي من حصة محمد (1,500)';saveE();}
   var _e24=expenses.find(function(e){return e.id===24;});if(_e24&&_e24.date==='2026-09-15'){_e24.date='2026-08-19';_e24.notes='مدفوع ✅ بتاريخ 19/08/2026';saveE();}
   var _e19=expenses.find(function(e){return e.id===19;});
@@ -798,7 +805,7 @@ function renderRent(){
 // ── Partner payments & settlement ──
 var PNAMES=['محمد','مشعل','أرشد'];
 // PAYERS[expense id] = [محمد, مشعل, أرشد]
-var PAYERS={14:[100,0,200],19:[0,100,0],20:[0,100,374],21:[0,30,0],22:[0,23,0],23:[1000,4000,2500],25:[0,600,0],26:[0,100,0],27:[0,0,7]};
+var PAYERS={14:[100,0,200],19:[0,100,0],20:[0,100,374],21:[0,30,0],22:[0,23,0],23:[1000,4000,2500],25:[0,600,0],26:[0,100,0],27:[0,0,7],28:[0,16.667,8.333],29:[0,66.667,33.333],30:[0,200,100]};
 var TRANSFERS=[{date:'2026-09-20',from:0,to:1,amount:1350,note:'تسديد جزء من حصة محمد'}];
 function settle(){
   var paid=[0,0,0],alloc=0;
